@@ -13,9 +13,9 @@ import {
     TextEditor
 } from "vscode";
 
-import ICounter from "./counter/ICounter";
+import ICounter from "./counters/ICounter";
 import ConfigurationHelper from './ConfigurationHelper';
-import CounterFactory from "./counter/CounterFactory";
+import CounterFactory from "./counters/CounterFactory";
 
 export default class ExtensionController {
 
