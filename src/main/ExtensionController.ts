@@ -86,7 +86,7 @@ export default class ExtensionController {
 
         let basis = `${this._counter?.type} count: ${this._counter?.count(content)}`;
 
-        if (selections.length > 1 || (selections.length == 1 && !isSimple)) {
+        if (selections.length > 1 || (selections.length === 1 && !isSimple)) {
             let accumulativeCount = 0;
 
             selections.forEach(selection => {
