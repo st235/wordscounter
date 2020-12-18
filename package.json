@@ -1,11 +1,13 @@
 {
 	"name": "st235-wordscounter",
 	"displayName": "Words Counter",
-	"description": "Counts words",
+	"description": "Extension which helps to count words, sentences, paragraphs, lines or characters",
 	"version": "0.0.1",
+	"publisher": "alexanderdadukin",
 	"engines": {
 		"vscode": "^1.52.0"
 	},
+	"repository": "https://github.com/st235/wordscounter",
 	"categories": [
 		"Other"
 	],
@@ -13,14 +15,6 @@
 		"*"
 	],
 	"main": "./dist/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "st235-wordscounter.helloWorld",
-				"title": "Hello World"
-			}
-		]
-	},
 	"scripts": {
 		"vscode:prepublish": "npm run package",
 		"compile": "webpack --config ./build/node-extension.webpack.config.js",
