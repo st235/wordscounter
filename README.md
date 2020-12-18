@@ -14,11 +14,11 @@ wordcounter.type = "your type goes here"
 
 The extension supports 5 different counter types:
 
-|word|
-|sentence|
-|paragraph|
-|line|
-|character|
+- word 
+- sentence 
+- paragraph 
+- line 
+- character
 
 ### License 
 
