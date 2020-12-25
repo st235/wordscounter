@@ -1,19 +1,16 @@
 import {
     ConfigurationChangeEvent,
     Disposable, 
-    TextDocument,
     TextEditorSelectionChangeEvent,
     TextDocumentChangeEvent,
 
     window,
     workspace,
     StatusBarItem,
-    StatusBarAlignment,
-    Selection,
-    TextEditor
+    StatusBarAlignment
 } from "vscode";
 
-import ICounter from "./counters/ICounter";
+import PrettyPrinter from './PrettyPrinter';
 import ConfigurationHelper from './ConfigurationHelper';
 import CounterFactory from "./counters/CounterFactory";
 
@@ -25,7 +22,7 @@ export default class ExtensionController {
 
     _statusBarItem: StatusBarItem;
 
-    _counter?: ICounter;
+    _printer?: PrettyPrinter;
 
     constructor() {
         let compositeDisposable: Disposable[] = [];
@@ -63,7 +60,7 @@ export default class ExtensionController {
 
     _reload() {
         const type = this._configuration.loadType();
-        this._counter = this._counterFactory.create(type);
+        this._printer = new PrettyPrinter(this._counterFactory.create(type));
     }
 
     _updateText() {
@@ -73,32 +70,11 @@ export default class ExtensionController {
         }
 
         const editor = window.activeTextEditor;
-        const document = editor.document;
-        const selections = editor.selections;
+        const prettyText = this._printer?.prepareText(editor);
 
-        this._statusBarItem.text = this._prepareText(document, selections, editor.selection.isEmpty);
+        this._statusBarItem.text = prettyText ?? "";
 
         this._statusBarItem.show();
-    }
-
-    _prepareText(document: TextDocument, selections: Selection[], isSimple: Boolean): string {
-        const content = document.getText();
-
-        let basis = `${this._counter?.type} count: ${this._counter?.count(content)}`;
-
-        if (selections.length > 1 || (selections.length === 1 && !isSimple)) {
-            let accumulativeCount = 0;
-
-            selections.forEach(selection => {
-                const subContent = document.getText(selection.with());
-                accumulativeCount += this._counter?.count(subContent) || 0;
-            });
-
-            basis += " ";
-            basis += `(selected: ${accumulativeCount})`;
-        }
-
-        return basis;
     }
 
     dispose() {

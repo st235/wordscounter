@@ -2,7 +2,7 @@
 	"name": "st235-wordscounter",
 	"displayName": "Words Counter",
 	"description": "An extension which helps to count words, sentences, paragraphs, lines or characters",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "alexanderdadukin",
 	"engines": {
 		"vscode": "^1.52.0"
